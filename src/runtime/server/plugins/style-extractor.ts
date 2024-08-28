@@ -1,6 +1,4 @@
 import Beastcss from 'beastcss'
-import { murmurHash } from 'ohash'
-import * as cheerio from 'cheerio'
 import { defineNitroPlugin, defineEventHandler, useStorage, getRouterParam, setHeader } from '#imports'
 
 export default defineNitroPlugin((nitroApp) => {
@@ -11,6 +9,9 @@ export default defineNitroPlugin((nitroApp) => {
     merge: true,
   })
 
+  const keyReg = /data-style-extractor-key="(.*?)"/
+  const styleReg = /<style[^>]*>([\s\S]*?)<\/style>/
+  const globalStyleReg = /<style[^>]*>([\s\S]*?)<\/style>/g
   nitroApp.router.add('/_css/:name', defineEventHandler(async (event) => {
     const name = getRouterParam(event, 'name')
     let css = await cacheStorage.getItem(name!)
@@ -23,27 +24,20 @@ export default defineNitroPlugin((nitroApp) => {
 
   nitroApp.hooks.hook('render:response', async (res) => {
     const html: string = res.body
-    const $ = cheerio.load(html)
-    const styles = $('style')
-    if (styles.length === 0) {
+    const [keyText, key] = html.match(keyReg) || []
+    if (!key) {
       return
     }
-    const hash = murmurHash(styles.toString())
-    const id = hash + '.css'
     const storage = import.meta.prerender ? assetsStorage : cacheStorage
-    const item = await storage.getItem(id)
+    const item = await storage.getItem(key)
     if (item === null) {
       const newHtml = await beastcss.process(html).catch(() => html)
-      const $$ = cheerio.load(newHtml)
-      const css = $$('style').html()
-      await storage.setItem(id, css || '')
-      $$(`style`).replaceWith(`<link href="/_css/${id}" rel="stylesheet" />`)
-      res.body = $$.html()
+      const [style, css] = newHtml.match(styleReg) || ['']
+
+      await storage.setItem(key, css || '')
+      res.body = newHtml.replace(keyText!, '').replace(style, `<link href="/_css/${key}" rel="stylesheet" />`)
       return
     }
-
-    $('style').remove()
-    $('head').append(`<link href="/_css/${id}" rel="stylesheet" />`)
-    res.body = $.html()
+    res.body = html.replace(keyText!, '').replace(globalStyleReg, '').replace('</head>', `<link href="/_css/${key}" rel="stylesheet" /> </head>`)
   })
 })

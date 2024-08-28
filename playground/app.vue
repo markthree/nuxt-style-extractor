@@ -8,6 +8,9 @@ useServerHead({
     {
       innerHTML: 'body { color: red }',
     },
+    {
+      innerHTML: 'body { background: gray }',
+    },
   ],
 })
 </script>

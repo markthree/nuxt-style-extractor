@@ -11,7 +11,6 @@ export default defineNitroPlugin((nitroApp) => {
 
   const keyReg = /data-style-extractor-key="(.*?)"/
   const styleReg = /<style[^>]*>([\s\S]*?)<\/style>/
-  const globalStyleReg = /<style[^>]*>([\s\S]*?)<\/style>/g
   nitroApp.router.add('/_css/:name', defineEventHandler(async (event) => {
     const name = getRouterParam(event, 'name')
     let css = await cacheStorage.getItem(name!)
@@ -24,7 +23,7 @@ export default defineNitroPlugin((nitroApp) => {
 
   nitroApp.hooks.hook('render:response', async (res) => {
     const html: string = res.body
-    const [keyText, key] = html.match(keyReg) || []
+    const [_, key] = html.match(keyReg) || []
     if (!key) {
       return
     }
@@ -35,9 +34,9 @@ export default defineNitroPlugin((nitroApp) => {
       const [style, css] = newHtml.match(styleReg) || ['']
 
       await storage.setItem(key, css || '')
-      res.body = newHtml.replace(keyText!, '').replace(style, `<link href="/_css/${key}" rel="stylesheet" />`)
+      res.body = newHtml.replace(style, `<link href="/_css/${key}" rel="stylesheet" />`)
       return
     }
-    res.body = html.replace(keyText!, '').replace(globalStyleReg, '').replace('</head>', `<link href="/_css/${key}" rel="stylesheet" /> </head>`)
+    res.body = html.replace(styleReg, `<link href="/_css/${key}" rel="stylesheet" />`)
   })
 })

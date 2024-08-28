@@ -8,30 +8,22 @@ export default defineNuxtPlugin({
     nuxt.ssrContext?.head.use({
       hooks: {
         'ssr:render'(ctx) {
-          const styles: string[] = []
-          for (const tag of ctx.tags) {
+          let style = ''
+          ctx.tags = ctx.tags.filter((tag) => {
             if (tag.tag === 'style' && tag.innerHTML) {
-              styles.push(tag.innerHTML)
+              style += tag.innerHTML
+              return false
             }
-          }
-
-          if (styles.length === 0) {
-            return
-          }
-
-          const key = hash([route.matched, styles])
-          const lastIndex = ctx.tags.length - 1
-          const lastTag = ctx.tags[lastIndex]
-          if (lastTag.tag === 'htmlAttrs') {
-            lastTag.props['data-style-extractor-key'] = `${key}.css`
-            return
-          }
-
-          for (const tag of ctx.tags) {
-            if (tag.tag === 'htmlAttrs') {
-              lastTag.props['data-style-extractor-key'] = `${key}.css`
-              return
-            }
+            return true
+          })
+          if (style) {
+            ctx.tags.push({
+              tag: 'style',
+              props: {
+                'data-style-extractor-key': hash([route.matched, style]),
+              },
+              innerHTML: style,
+            })
           }
         },
       },

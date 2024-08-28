@@ -21,12 +21,11 @@ export default defineNuxtModule<ModuleOptions>({
     name: 'nuxt-style-extractor',
     configKey: 'Extracts the style of the page as an external css when rendered on the server side | 提取服务端渲染时页面的 style 为外部 css',
   },
-  // Default configuration options of the Nuxt module
   defaults: {},
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
 
-    addPlugin(resolver.resolve('./runtime/inject-style-id'))
+    addPlugin(resolver.resolve('./runtime/inject-style-id.server'))
 
     addServerPlugin(resolver.resolve('./runtime/server/plugins/style-extractor'))
 

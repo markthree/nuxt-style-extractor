@@ -34,9 +34,13 @@ export default defineNitroPlugin((nitroApp) => {
       const [style, css] = newHtml.match(styleReg) || ['']
 
       await storage.setItem(key, css || '')
-      res.body = newHtml.replace(style, `<link href="/_css/${key}" rel="stylesheet" />`)
+      if (css) {
+        res.body = newHtml.replace(style, `<link href="/_css/${key}" rel="stylesheet" />`)
+      }
       return
     }
-    res.body = html.replace(styleReg, `<link href="/_css/${key}" rel="stylesheet" />`)
+    if (item) {
+      res.body = html.replace(styleReg, `<link href="/_css/${key}" rel="stylesheet" />`)
+    }
   })
 })

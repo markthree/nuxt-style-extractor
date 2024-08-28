@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.2...v0.0.3)
+
+### 🔥 Performance
+
+- Using simpler regular parsing ([555800b](https://github.com/markthree/nuxt-style-extractor/commit/555800b))
+- Load server-side plugins only ([8a97a8e](https://github.com/markthree/nuxt-style-extractor/commit/8a97a8e))
+- Simpler style hash ([d598caa](https://github.com/markthree/nuxt-style-extractor/commit/d598caa))
+
+### 🩹 Fixes
+
+- Fix key ([f85ddcb](https://github.com/markthree/nuxt-style-extractor/commit/f85ddcb))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.0.2
 
 

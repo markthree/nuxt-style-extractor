@@ -17,10 +17,11 @@ export default defineNuxtPlugin({
             return true
           })
           if (style) {
+            const key = hash([route.matched, style]) + '.css'
             ctx.tags.push({
               tag: 'style',
               props: {
-                'data-style-extractor-key': hash([route.matched, style]),
+                'data-style-extractor-key': key,
               },
               innerHTML: style,
             })

@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.0
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.8...v0.1.0)
+
+### 🩹 Fixes
+
+- ⚠️  Rename the mjs module to js ([b72596a](https://github.com/markthree/nuxt-style-extractor/commit/b72596a))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Rename the mjs module to js ([b72596a](https://github.com/markthree/nuxt-style-extractor/commit/b72596a))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.0.8
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.7...v0.0.8)

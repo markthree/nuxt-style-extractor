@@ -1,6 +1,6 @@
 {
   "name": "nuxt-style-extractor",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Extracts the style of the page as an external css when rendered on the server side | 提取服务端渲染时页面的 style 为外部 css",
   "repository": "markthree/nuxt-style-extractor",
   "license": "MIT",

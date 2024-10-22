@@ -5,8 +5,6 @@ import purgehtml from 'purgecss-from-html'
 import { defineNuxtPlugin } from '#imports'
 import extractorOptions from '#build/nuxt-style-extractor-options.mjs'
 
-console.log(extractorOptions)
-
 interface Options {
   html: string
   css: string

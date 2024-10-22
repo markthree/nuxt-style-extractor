@@ -11,9 +11,6 @@ importers:
       '@nuxt/kit':
         specifier: ^3.12.4
         version: 3.12.4(magicast@0.3.4)(rollup@4.20.0)
-      browserslist:
-        specifier: ^4.24.2
-        version: 4.24.2
       cssnano:
         specifier: ^7.0.6
         version: 7.0.6(postcss@8.4.41)

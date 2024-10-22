@@ -22,7 +22,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'Extracts the style of the page as an external css when rendered on the server side | 提取服务端渲染时页面的 style 为外部 css',
   },
   defaults: {
-    minify: true,
+    minify: false,
     removeUnused: true,
   },
   async setup(_options, nuxt) {
@@ -65,7 +65,7 @@ export default defineNuxtModule<ModuleOptions>({
     addTypeTemplate({
       filename: 'nuxt-style-extractor-options.d.ts',
       getContents() {
-        return readFile(resolver.resolve('./nuxt-style-extractor-options.d.ts'), 'utf-8')
+        return readFile(resolver.resolve('./runtime/nuxt-style-extractor-options.d.ts'), 'utf-8')
       },
     })
   },

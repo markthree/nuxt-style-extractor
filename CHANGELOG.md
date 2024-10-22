@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.7...v0.0.8)
+
+### 🩹 Fixes
+
+- Ignore test ([b52476a](https://github.com/markthree/nuxt-style-extractor/commit/b52476a))
+- Ignore test ([c791207](https://github.com/markthree/nuxt-style-extractor/commit/c791207))
+
+### 💅 Refactors
+
+- Use of more compatible programmes ([53d076d](https://github.com/markthree/nuxt-style-extractor/commit/53d076d))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.0.7
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.4...v0.0.7)

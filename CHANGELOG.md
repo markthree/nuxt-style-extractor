@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.3...v0.0.4)
+
+### 🔥 Performance
+
+- Use of more compatible programmes ([d9574c7](https://github.com/markthree/nuxt-style-extractor/commit/d9574c7))
+
+### 🩹 Fixes
+
+- Ignored if there is no style ([adb18eb](https://github.com/markthree/nuxt-style-extractor/commit/adb18eb))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.0.3
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.2...v0.0.3)

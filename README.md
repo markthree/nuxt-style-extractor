@@ -47,3 +47,32 @@ export default defineNuxtConfig({
 ```
 
 That's all. Everything's automatic.
+
+### Configuration
+
+Of course, you can also configure it.
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  styleExtractor: {
+    minify: true, // Whether to enable minification
+    removeUnused: true, // Whether to remove unused styles
+  },
+});
+```
+
+#### Custom Transformer
+
+```ts
+// style-extractor.mjs
+export default (options) => {
+  return options.css + "body { background: red }";
+};
+// nuxt.config.ts
+export default defineNuxtConfig({
+  styleExtractor: {
+    transformFile: "style-extractor.mjs",
+  },
+});
+```

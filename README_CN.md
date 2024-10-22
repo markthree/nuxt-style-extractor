@@ -42,3 +42,33 @@ export default defineNuxtConfig({
 ```
 
 仅此而已，一切都是自动的。
+
+### 配置
+
+当然你也可以进行配置
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+    styleExtractor: {
+        minify: true, // 是否开启压缩
+        removeUnused: true, // 是否移除未使用
+    },
+});
+```
+
+#### 自定义转换器
+
+```ts
+// style-extractor.mjs
+export default (options) => {
+    return options.css + "body { background: red }";
+};
+
+// nuxt.config.ts
+export default defineNuxtConfig({
+    styleExtractor: {
+        transformFile: "style-extractor.mjs",
+    },
+});
+```

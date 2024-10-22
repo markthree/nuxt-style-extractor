@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.5...v0.0.6)
+
+### 🩹 Fixes
+
+- Update npmrc ([1e80ed1](https://github.com/markthree/nuxt-style-extractor/commit/1e80ed1))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.0.5
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.4...v0.0.5)

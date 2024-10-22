@@ -1,7 +1,7 @@
 import { join } from 'node:path'
-import fs from 'node:fs/promises'
+import fs, { readFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
-import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { addPlugin, addServerPlugin, addTemplate, addTypeTemplate, createResolver, defineNuxtModule } from '@nuxt/kit'
 
 function emptyDir(dir: string) {
   if (!existsSync(dir)) {
@@ -21,7 +21,10 @@ export default defineNuxtModule<ModuleOptions>({
     name: 'nuxt-style-extractor',
     configKey: 'Extracts the style of the page as an external css when rendered on the server side | 提取服务端渲染时页面的 style 为外部 css',
   },
-  defaults: {},
+  defaults: {
+    minify: true,
+    removeUnused: true,
+  },
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
 
@@ -50,5 +53,20 @@ export default defineNuxtModule<ModuleOptions>({
         maxAge: 0,
       })
     }
+
+    addTemplate({
+      filename: 'nuxt-style-extractor-options.mjs',
+
+      getContents() {
+        return `export default ${JSON.stringify(_options)}`
+      },
+    })
+
+    addTypeTemplate({
+      filename: 'nuxt-style-extractor-options.d.ts',
+      getContents() {
+        return readFile(resolver.resolve('./nuxt-style-extractor-options.d.ts'), 'utf-8')
+      },
+    })
   },
 })

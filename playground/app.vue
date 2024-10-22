@@ -1,5 +1,7 @@
 <template>
-  <div>View Panel</div>
+  <div class="foo">
+    View Panel
+  </div>
 </template>
 
 <script setup>
@@ -9,7 +11,13 @@ useServerHead({
       innerHTML: 'body { color: red }',
     },
     {
-      innerHTML: 'body { background: gray }',
+      innerHTML: '.foo { background: gray }',
+    },
+    {
+      innerHTML: '.bar { color: blue }',
+    },
+    {
+      innerHTML: '.foo { color: white }',
     },
   ],
 })

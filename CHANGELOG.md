@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v0.0.7
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.4...v0.0.7)
+
+### 🔥 Performance
+
+- Use of more compatible programmes ([d9574c7](https://github.com/markthree/nuxt-style-extractor/commit/d9574c7))
+
+### 🩹 Fixes
+
+- Update npmrc ([1e80ed1](https://github.com/markthree/nuxt-style-extractor/commit/1e80ed1))
+- Temporarily close minify ([c564ee1](https://github.com/markthree/nuxt-style-extractor/commit/c564ee1))
+
+### 🏡 Chore
+
+- **release:** V0.0.4 ([7a0f510](https://github.com/markthree/nuxt-style-extractor/commit/7a0f510))
+- **release:** V0.0.5 ([39e3b77](https://github.com/markthree/nuxt-style-extractor/commit/39e3b77))
+- **release:** V0.0.6 ([2979442](https://github.com/markthree/nuxt-style-extractor/commit/2979442))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.0.6
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.5...v0.0.6)

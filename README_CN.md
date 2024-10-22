@@ -60,7 +60,7 @@ export default defineNuxtConfig({
 #### 自定义转换器
 
 ```ts
-// style-extractor.mjs
+// style-extractor.js
 export default (options) => {
     return options.css + "body { background: red }";
 };
@@ -68,7 +68,7 @@ export default (options) => {
 // nuxt.config.ts
 export default defineNuxtConfig({
     styleExtractor: {
-        transformFile: "style-extractor.mjs",
+        transformFile: "style-extractor.js",
     },
 });
 ```

@@ -30,7 +30,7 @@ export interface ModuleOptions {
    * @description Optimise css module path
    * @example
    * ```
-   * // style-extractor.mjs
+   * // style-extractor.js
    * export default options => {
    *    return options.css + 'body { background: red }'
    * }
@@ -38,7 +38,7 @@ export interface ModuleOptions {
    * // nuxt.config.ts
    * export default defineNuxtConfig({
    *  styleExtractor: {
-   *    transformFile: 'style-extractor.mjs'
+   *    transformFile: 'style-extractor.js'
    *  }
    * })
    * ```
@@ -86,14 +86,14 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     addTemplate({
-      filename: 'nuxt-style-extractor-config-hash.mjs',
+      filename: 'nuxt-style-extractor-config-hash.js',
       getContents() {
         return `export const configHash = "${hash(_options)}"`
       },
     })
 
     addTemplate({
-      filename: 'nuxt-style-extractor-transform.mjs',
+      filename: 'nuxt-style-extractor-transform.js',
       getContents() {
         if (_options.transformFile !== '') {
           return fs.readFile(_options.transformFile, 'utf-8')
@@ -111,18 +111,18 @@ export default defineNuxtModule<ModuleOptions>({
 
     function getDefaultTransformFile() {
       if (_options.minify && _options.removeUnused) {
-        return resolver.resolve('./runtime/transforms/best.mjs')
+        return resolver.resolve('./runtime/transforms/best.js')
       }
 
       if (_options.minify) {
-        return resolver.resolve('./runtime/transforms/minify.mjs')
+        return resolver.resolve('./runtime/transforms/minify.js')
       }
 
       if (_options.removeUnused) {
-        return resolver.resolve('./runtime/transforms/remove-unused.mjs')
+        return resolver.resolve('./runtime/transforms/remove-unused.js')
       }
 
-      return resolver.resolve('./runtime/transforms/plain.mjs')
+      return resolver.resolve('./runtime/transforms/plain.js')
     }
   },
 })

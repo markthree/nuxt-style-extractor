@@ -1,7 +1,7 @@
 import { hash } from 'ohash'
 import { defineNuxtPlugin } from '#imports'
-import optimiseCss from '#build/nuxt-style-extractor-transform.mjs'
-import { configHash } from '#build/nuxt-style-extractor-config-hash.mjs'
+import optimiseCss from '#build/nuxt-style-extractor-transform.js'
+import { configHash } from '#build/nuxt-style-extractor-config-hash.js'
 
 export default defineNuxtPlugin({
   name: 'style-extractor',

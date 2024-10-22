@@ -1,8 +1,8 @@
-declare module '#build/nuxt-style-extractor-config-hash.mjs' {
+declare module '#build/nuxt-style-extractor-config-hash.js' {
   export const configHash: string
 }
 
-declare module '#build/nuxt-style-extractor-transform.mjs' {
+declare module '#build/nuxt-style-extractor-transform.js' {
   export interface Options {
     html: string
     css: string

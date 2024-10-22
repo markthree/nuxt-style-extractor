@@ -65,14 +65,14 @@ export default defineNuxtConfig({
 #### Custom Transformer
 
 ```ts
-// style-extractor.mjs
+// style-extractor.js
 export default (options) => {
   return options.css + "body { background: red }";
 };
 // nuxt.config.ts
 export default defineNuxtConfig({
   styleExtractor: {
-    transformFile: "style-extractor.mjs",
+    transformFile: "style-extractor.js",
   },
 });
 ```

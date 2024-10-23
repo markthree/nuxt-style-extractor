@@ -1,10 +1,10 @@
 import { hash } from 'ohash'
 import { defineNuxtPlugin } from '#imports'
-import optimiseCss from '#build/nuxt-style-extractor-transform.js'
 import { configHash } from '#build/nuxt-style-extractor-config-hash.js'
 
 export default defineNuxtPlugin({
   name: 'style-extractor',
+  parallel: true,
   setup(nuxt) {
     nuxt.hook('app:rendered', async (nuxtCtx) => {
       const html = nuxtCtx.renderResult?.html || ''
@@ -25,48 +25,12 @@ export default defineNuxtPlugin({
             }
 
             const name = hash([html, style, configHash]) + '.css'
-
-            const oldCss = await $fetch(`/_css/${name}`)
-
-            if (oldCss === '') {
-              return
-            }
-
-            if (oldCss) {
-              ctx.tags.push({
-                tag: 'link',
-                props: {
-                  rel: 'stylesheet',
-                  href: `/_css/${name}`,
-                },
-              })
-              return
-            }
-
-            const css = await optimiseCss({
-              html,
-              css: style,
-              name,
-            })
-
-            await $fetch('/_css', {
-              body: {
-                name,
-                css,
-              },
-              method: 'POST',
-            })
-
-            if (css === '') {
-              return
-            }
-
             ctx.tags.push({
-              tag: 'link',
+              tag: 'style',
               props: {
-                rel: 'stylesheet',
-                href: `/_css/${name}`,
+                'data-style-extractor-name': name,
               },
+              innerHTML: style,
             })
           },
         },

@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import { existsSync } from 'node:fs'
-import { join, isAbsolute } from 'node:path'
+import { join, isAbsolute } from 'pathe'
 import { hash } from 'ohash'
 import { addPlugin, addServerPlugin, addTemplate, addTypeTemplate, createResolver, defineNuxtModule } from '@nuxt/kit'
 
@@ -71,11 +71,13 @@ export default defineNuxtModule<ModuleOptions>({
     cacheControl: 'public, max-age=31536000, immutable',
   },
   async setup(_options, nuxt) {
+    // disable module when spa
+    if (!nuxt.options.ssr) {
+      return
+    }
+
     const resolver = createResolver(import.meta.url)
-
-    addPlugin(resolver.resolve('./runtime/plugin.server'))
-
-    addServerPlugin(resolver.resolve('./runtime/server/plugins/style-extractor'))
+    const transformFile = getTransformFile()
 
     const cacheDir = join(nuxt.options.buildDir, 'cache/_css/')
 
@@ -89,17 +91,20 @@ export default defineNuxtModule<ModuleOptions>({
       baseName: '_css',
       dir: cacheDir,
     })
-    const isGenerate = nuxt.options.dev === false && nuxt.options.nitro.static
-    if (isGenerate) {
-      nuxt.options.nitro.publicAssets ??= []
-      nuxt.options.nitro.publicAssets.push({
-        baseURL: '/_css',
-        dir: cacheDir,
-        maxAge: 0,
-      })
-    }
+    nuxt.options.nitro.publicAssets ??= []
+    nuxt.options.nitro.publicAssets.push({
+      baseURL: '/_css',
+      dir: cacheDir,
+      maxAge: 0,
+    })
 
-    const transformFile = getTransformFile()
+    nuxt.options.nitro.virtual ??= {}
+    nuxt.options.nitro.virtual['#style-extractor/nuxt-style-extractor-transform.js'] = () => {
+      return fs.readFile(transformFile, 'utf-8')
+    }
+    addPlugin(resolver.resolve(`./runtime/plugin.server`))
+
+    addServerPlugin(resolver.resolve(`./runtime/server/plugins/style-extractor`))
 
     addTemplate({
       filename: 'nuxt-style-extractor-config-hash.js',

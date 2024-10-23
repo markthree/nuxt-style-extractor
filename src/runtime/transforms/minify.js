@@ -1,9 +1,14 @@
-import { minify } from 'csso'
+import cssnano from 'cssnano'
 
-export default (options) => {
-  const { css } = options
-
-  return minify(css || '', {
-    sourceMap: false,
-  }).css
+let cssnanoCtx
+export default async (options) => {
+  const { css, name } = options
+  if (!cssnanoCtx) {
+    cssnanoCtx = cssnano()
+  }
+  const result = await cssnanoCtx.process(css, {
+    from: name,
+    to: name,
+  })
+  return result.css
 }

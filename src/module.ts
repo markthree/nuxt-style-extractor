@@ -1,6 +1,6 @@
-import { join } from 'node:path'
 import fs from 'node:fs/promises'
 import { existsSync } from 'node:fs'
+import { join, isAbsolute } from 'node:path'
 import { hash } from 'ohash'
 import { addPlugin, addServerPlugin, addTemplate, addTypeTemplate, createResolver, defineNuxtModule } from '@nuxt/kit'
 
@@ -44,6 +44,18 @@ export interface ModuleOptions {
    * ```
    */
   transformFile: string
+
+  /**
+   * @default 'nuxt-style-extractor'
+   * @description If you want to invalidate all caches, then change the baseHash
+   */
+  baseHash: string
+
+  /**
+   * @default 'public, max-age=31536000, immutable'
+   * @description Set cache header, valid only when ssr is in production
+   */
+  cacheControl: string | null
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -55,6 +67,8 @@ export default defineNuxtModule<ModuleOptions>({
     minify: true,
     removeUnused: true,
     transformFile: '',
+    baseHash: 'nuxt-style-extractor',
+    cacheControl: 'public, max-age=31536000, immutable',
   },
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
@@ -85,20 +99,20 @@ export default defineNuxtModule<ModuleOptions>({
       })
     }
 
+    const transformFile = getTransformFile()
+
     addTemplate({
       filename: 'nuxt-style-extractor-config-hash.js',
-      getContents() {
-        return `export const configHash = "${hash(_options)}"`
+      async getContents() {
+        const modeText = await fs.readFile(transformFile, 'utf-8')
+        return `export const configHash = "${hash([_options, modeText])}"`
       },
     })
 
     addTemplate({
       filename: 'nuxt-style-extractor-transform.js',
       getContents() {
-        if (_options.transformFile !== '') {
-          return fs.readFile(_options.transformFile, 'utf-8')
-        }
-        return fs.readFile(getDefaultTransformFile(), 'utf-8')
+        return fs.readFile(transformFile, 'utf-8')
       },
     })
 
@@ -109,7 +123,20 @@ export default defineNuxtModule<ModuleOptions>({
       },
     })
 
-    function getDefaultTransformFile() {
+    if (_options.cacheControl && !nuxt.options.dev) {
+      nuxt.options.routeRules ??= {}
+      nuxt.options.routeRules['/_css/*'] = {
+        headers: {
+          'Cache-Control': _options.cacheControl,
+        },
+      }
+    }
+
+    function getTransformFile() {
+      if (_options.transformFile !== '') {
+        return isAbsolute(_options.transformFile) ? _options.transformFile : join(nuxt.options.rootDir, _options.transformFile)
+      }
+
       if (_options.minify && _options.removeUnused) {
         return resolver.resolve('./runtime/transforms/best.js')
       }

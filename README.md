@@ -22,8 +22,7 @@ Faster rendering and more readable seo
 <!-- Highlight some of the features your module provide here -->
 
 - 🚠 &nbsp;Optimal Caching
-- ⛰ &nbsp;Supports all rendering modes, spa, ssg, ssr and ssr with
-  pre-rendering.
+- ⛰ &nbsp;Supports ssg, ssr and ssr with pre-rendering.
 - 🌲 &nbsp;Intelligent minification extraction, removing unused styles from the
   page, merging duplicate styles
 

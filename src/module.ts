@@ -91,12 +91,15 @@ export default defineNuxtModule<ModuleOptions>({
       baseName: '_css',
       dir: cacheDir,
     })
-    nuxt.options.nitro.publicAssets ??= []
-    nuxt.options.nitro.publicAssets.push({
-      baseURL: '/_css',
-      dir: cacheDir,
-      maxAge: 0,
-    })
+    const isGenerate = nuxt.options.dev === false && nuxt.options.nitro.static
+    if (isGenerate) {
+      nuxt.options.nitro.publicAssets ??= []
+      nuxt.options.nitro.publicAssets.push({
+        baseURL: '/_css',
+        dir: cacheDir,
+        maxAge: 0,
+      })
+    }
 
     nuxt.options.nitro.virtual ??= {}
     nuxt.options.nitro.virtual['#style-extractor/nuxt-style-extractor-transform.js'] = () => {

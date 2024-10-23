@@ -1,4 +1,4 @@
-import cssnano from 'cssnano'
+import { minify } from 'csso/dist/csso.esm'
 import { PurgeCSS } from 'purgecss'
 import purgehtml from 'purgecss-from-html'
 
@@ -19,17 +19,11 @@ async function removeUnusedCss(options) {
   return result.css || ''
 }
 
-let cssnanoCtx
 async function minifyCss(options) {
-  const { css, name } = options
-  if (!cssnanoCtx) {
-    cssnanoCtx = cssnano()
-  }
-  const result = await cssnanoCtx.process(css, {
-    from: name,
-    to: name,
-  })
-  return result.css
+  const { css } = options
+  return minify(css, {
+    comments: false,
+  }).css
 }
 
 async function optimiseCss(options) {

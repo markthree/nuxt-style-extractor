@@ -23,3 +23,8 @@ declare module '#style-extractor/nuxt-style-extractor-transform.js' {
   const optimiseCss: OptimiseCss
   export default optimiseCss
 }
+
+declare module '#style-extractor/nuxt-style-extractor-cache-control.js' {
+  const cacheControl: string
+  export default cacheControl
+}

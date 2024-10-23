@@ -105,6 +105,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.nitro.virtual['#style-extractor/nuxt-style-extractor-transform.js'] = () => {
       return fs.readFile(transformFile, 'utf-8')
     }
+
+    nuxt.options.nitro.virtual['#style-extractor/nuxt-style-extractor-cache-control.js'] = () => {
+      return `const cacheControl = "${_options.cacheControl === null ? '' : _options.cacheControl}";
+      export default cacheControl`
+    }
+
     addPlugin(resolver.resolve(`./runtime/plugin.server`))
 
     addServerPlugin(resolver.resolve(`./runtime/server/plugins/style-extractor`))
@@ -130,15 +136,6 @@ export default defineNuxtModule<ModuleOptions>({
         return fs.readFile(resolver.resolve('./runtime/nuxt-style-extractor.d.ts'), 'utf-8')
       },
     })
-
-    if (_options.cacheControl && !nuxt.options.dev) {
-      nuxt.options.routeRules ??= {}
-      nuxt.options.routeRules['/_css/*'] = {
-        headers: {
-          'Cache-Control': _options.cacheControl,
-        },
-      }
-    }
 
     function getTransformFile() {
       if (_options.transformFile !== '') {

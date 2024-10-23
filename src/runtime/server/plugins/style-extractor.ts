@@ -1,5 +1,6 @@
 import { defineNitroPlugin, defineEventHandler, useStorage, getRouterParam, setHeader } from '#imports'
 import optimiseCss from '#style-extractor/nuxt-style-extractor-transform.js'
+import cacheControl from '#style-extractor/nuxt-style-extractor-cache-control.js'
 
 export default defineNitroPlugin((nitroApp) => {
   const nameReg = /data-style-extractor-name="(.*?)"/
@@ -13,6 +14,10 @@ export default defineNitroPlugin((nitroApp) => {
     setHeader(event, 'Content-Type', 'text/css')
     if (!css) {
       css = await assetsStorage.getItem(name!)
+    }
+
+    if (!import.meta.dev && cacheControl !== '') {
+      setHeader(event, 'Cache-Control', cacheControl)
     }
 
     return css

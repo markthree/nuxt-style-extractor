@@ -2,9 +2,14 @@ import { hash } from 'ohash'
 import { defineNuxtPlugin } from '#imports'
 import { configHash } from '#build/nuxt-style-extractor-config-hash.js'
 
+declare module '#app' {
+  interface NuxtApp {
+
+  }
+}
 export default defineNuxtPlugin({
   name: 'style-extractor',
-  parallel: true,
+  enforce: 'post',
   setup(nuxt) {
     nuxt.hook('app:rendered', async (nuxtCtx) => {
       const html = nuxtCtx.renderResult?.html || ''

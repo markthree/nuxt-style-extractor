@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.1.1...v0.1.2)
+
+### 🔥 Performance
+
+- Use of optimised utils ([3826654](https://github.com/markthree/nuxt-style-extractor/commit/3826654))
+
+### 🩹 Fixes
+
+- Fix plugin type ([b1f4e82](https://github.com/markthree/nuxt-style-extractor/commit/b1f4e82))
+- Ignore lint ([7c2f3ae](https://github.com/markthree/nuxt-style-extractor/commit/7c2f3ae))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.1.1
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.1.0...v0.1.1)

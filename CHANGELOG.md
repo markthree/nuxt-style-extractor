@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v0.1.1
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.1.0...v0.1.1)
+
+### 🩹 Fixes
+
+- Fix hash ([6b0b5c1](https://github.com/markthree/nuxt-style-extractor/commit/6b0b5c1))
+- Support ssg ([fefd1d4](https://github.com/markthree/nuxt-style-extractor/commit/fefd1d4))
+- Supports minify in production environments ([0987650](https://github.com/markthree/nuxt-style-extractor/commit/0987650))
+- Fix cacheControl ([50b6211](https://github.com/markthree/nuxt-style-extractor/commit/50b6211))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.1.0
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.0.8...v0.1.0)

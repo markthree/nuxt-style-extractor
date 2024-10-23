@@ -13,8 +13,12 @@ export default createConfigForNuxt({
     src: [
       './playground',
     ],
+
   },
+
 })
   .append(
-    // your custom flat config here...
+    {
+      ignores: ['src/runtime/utils/**/*'],
+    },
   )

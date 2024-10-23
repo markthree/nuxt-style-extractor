@@ -105,6 +105,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.nitro.virtual['#style-extractor/nuxt-style-extractor-transform.js'] = () => {
       return fs.readFile(transformFile, 'utf-8')
     }
+    nuxt.options.nitro.virtual['#style-extractor/remove-unused.js'] = () => {
+      return fs.readFile(resolver.resolve('./runtime/utils/remove-unused.js'), 'utf-8')
+    }
+    nuxt.options.nitro.virtual['#style-extractor/minify.js'] = () => {
+      return fs.readFile(resolver.resolve('./runtime/utils/minify.js'), 'utf-8')
+    }
 
     nuxt.options.nitro.virtual['#style-extractor/nuxt-style-extractor-cache-control.js'] = () => {
       return `const cacheControl = "${_options.cacheControl === null ? '' : _options.cacheControl}";
@@ -120,13 +126,6 @@ export default defineNuxtModule<ModuleOptions>({
       async getContents() {
         const modeText = await fs.readFile(transformFile, 'utf-8')
         return `export const configHash = "${hash([_options, modeText])}"`
-      },
-    })
-
-    addTemplate({
-      filename: 'nuxt-style-extractor-transform.js',
-      getContents() {
-        return fs.readFile(transformFile, 'utf-8')
       },
     })
 

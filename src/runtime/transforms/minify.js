@@ -1,4 +1,4 @@
-import { minify } from 'csso/dist/csso.esm'
+import { minify } from '#style-extractor/minify.js'
 
 export default async (options) => {
   const { css } = options

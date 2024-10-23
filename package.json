@@ -31,11 +31,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.13.2",
-    "csso": "^5.0.5",
     "ohash": "^1.1.4",
-    "pathe": "^1.1.2",
-    "purgecss": "^6.0.0",
-    "purgecss-from-html": "^6.0.0"
+    "pathe": "^1.1.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.0",

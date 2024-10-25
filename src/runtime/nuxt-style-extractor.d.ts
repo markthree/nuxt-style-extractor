@@ -2,7 +2,7 @@ declare module '#build/nuxt-style-extractor-config-hash.js' {
   export const configHash: string
 }
 
-declare module '#build/nuxt-style-extractor-transform.js' {
+declare module '#style-extractor/nuxt-style-extractor-transform.js' {
   export interface Options {
     html: string
     css: string

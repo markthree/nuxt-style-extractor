@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.1.2...v0.1.3)
+
+### 🩹 Fixes
+
+- Fix type ([a63ef77](https://github.com/markthree/nuxt-style-extractor/commit/a63ef77))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.1.2
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.1.1...v0.1.2)

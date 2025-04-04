@@ -3,4 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: '2024-08-16',
   sourcemap: false,
+  styleExtractor: {
+    original: true,
+  },
 })

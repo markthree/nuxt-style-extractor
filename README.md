@@ -61,6 +61,18 @@ export default defineNuxtConfig({
 });
 ```
 
+#### Preserve Original State
+
+If you don't need any optimization and want to maintain the original order of styles, you can set `original` to `true`
+
+```ts
+export default defineNuxtConfig({
+  styleExtractor: {
+    original: true, // Only extract CSS without any optimization processing
+  },
+});
+```
+
 #### Custom Transformer
 
 ```ts

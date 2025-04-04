@@ -37,7 +37,7 @@ npm i nuxt-style-extractor
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-    modules: ["nuxt-style-extractor"],
+  modules: ["nuxt-style-extractor"],
 });
 ```
 
@@ -50,10 +50,22 @@ export default defineNuxtConfig({
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-    styleExtractor: {
-        minify: true, // 是否开启压缩
-        removeUnused: true, // 是否移除未使用
-    },
+  styleExtractor: {
+    minify: true, // 是否开启压缩
+    removeUnused: true, // 是否移除未使用
+  },
+});
+```
+
+#### 保持原有状态
+
+如果你不需要任何优化，同时想保持原有的样式顺序，可以设置为 `original` 为 `true`
+
+```ts
+export default defineNuxtConfig({
+  styleExtractor: {
+    original: true, // 仅提取 css 不做任何优化处理
+  },
 });
 ```
 
@@ -62,13 +74,13 @@ export default defineNuxtConfig({
 ```ts
 // style-extractor.js
 export default (options) => {
-    return options.css + "body { background: red }";
+  return options.css + "body { background: red }";
 };
 
 // nuxt.config.ts
 export default defineNuxtConfig({
-    styleExtractor: {
-        transformFile: "style-extractor.js",
-    },
+  styleExtractor: {
+    transformFile: "style-extractor.js",
+  },
 });
 ```

@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-useHead({
+useServerHead({
   style: [
     {
       innerHTML: 'body { color: red }',

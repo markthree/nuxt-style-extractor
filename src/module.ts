@@ -17,6 +17,13 @@ function emptyDir(dir: string) {
 // Module options TypeScript interface definition
 export interface ModuleOptions {
   /**
+   * original
+   * @description Keep the order as is, without any optimization
+   * @default false
+   */
+  original: boolean
+
+  /**
    * @default true
    */
   minify: boolean
@@ -65,6 +72,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     minify: true,
+    original: false,
     removeUnused: true,
     transformFile: '',
     baseHash: 'nuxt-style-extractor',
@@ -117,9 +125,12 @@ export default defineNuxtModule<ModuleOptions>({
       export default cacheControl`
     }
 
-    addPlugin(resolver.resolve(`./runtime/plugin.server`))
+    if (!_options.original) {
+      addPlugin(resolver.resolve(`./runtime/plugin.server`))
+    }
 
-    addServerPlugin(resolver.resolve(`./runtime/server/plugins/style-extractor`))
+    const serverPluginName = _options.original ? 'original-style-extractor' : 'style-extractor'
+    addServerPlugin(resolver.resolve(`./runtime/server/plugins/${serverPluginName}`))
 
     addTemplate({
       filename: 'nuxt-style-extractor-config-hash.js',

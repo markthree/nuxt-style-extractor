@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.1.3...v0.1.4)
+
+### 🚀 Enhancements
+
+- Add original option ([abd1fe0](https://github.com/markthree/nuxt-style-extractor/commit/abd1fe0))
+
+### ❤️ Contributors
+
+- Markthree ([@markthree](http://github.com/markthree))
+
 ## v0.1.3
 
 [compare changes](https://github.com/markthree/nuxt-style-extractor/compare/v0.1.2...v0.1.3)
